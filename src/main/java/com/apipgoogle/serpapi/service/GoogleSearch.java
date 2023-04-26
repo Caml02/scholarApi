@@ -14,13 +14,12 @@ import org.springframework.stereotype.Service;
 public class GoogleSearch {
 
     private static final String BASE_URL = "https://serpapi.com/search";
-    private static final String apiKEY = "92cb41255f4ea095a973eb0874db3ddae31c6f97ea72730e3717769f2f7a4631";
+    private static final String apiKEY = System.getenv("API_KEY");
 
     public JsonObject search(String query) throws IOException {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(BASE_URL + "?engine=google_scholar&q " + query)
-                .addHeader("Authorization", "Bearer " + apiKEY)
+                .url(BASE_URL + "?engine=google_scholar&q=" + query + "&api_key=" + apiKEY)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String responseBody = response.body().string();
@@ -28,5 +27,4 @@ public class GoogleSearch {
             return json;
         }
     }
-    
 }

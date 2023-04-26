@@ -30,21 +30,20 @@ import com.google.gson.JsonArray;
 @RequestMapping("/search")
 public class SearchController {
     
-    /**@Autowired
+    @Autowired
     private GoogleSearch googleSearch;
     @Autowired
-    private SearchRepositoryResult searchResultsRepository;**/
-    private final GoogleSearch googleSearch;
-    private final SearchRepositoryResult searchResultsRepository;
+    private SearchRepositoryResult searchResultsRepository;
 
     public SearchController(GoogleSearch googleSearch, SearchRepositoryResult searchResultsRepository) {
         this.googleSearch = googleSearch;
         this.searchResultsRepository = searchResultsRepository;
     }
 
-    @GetMapping /**(path = "/{query}", produces = { "application/json" })**/
-    public List<SearchResults> search(@RequestParam("query") String query) throws IOException {
+    @GetMapping 
+    public List<SearchResults> search(@RequestParam(required=false,name="query") String query) throws IOException {
         JsonObject response = googleSearch.search(query);
+        System.out.println(query);
         JsonArray results = response.getAsJsonArray("organic_results");
         List<SearchResults> searchResults = new ArrayList<>();
         for (JsonElement result : results) {
