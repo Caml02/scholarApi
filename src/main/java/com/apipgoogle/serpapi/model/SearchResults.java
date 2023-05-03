@@ -103,4 +103,5 @@ public class SearchResults {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 }

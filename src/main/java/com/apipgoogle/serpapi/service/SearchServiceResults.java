@@ -12,8 +12,6 @@ public interface SearchServiceResults {
 
     public SearchResults UpdatedResult(SearchResults searchResults);
 
-    public SearchResults getSearchResult(int id);
-
-    public void DeleteResult(int id);
+    public void DeleteResult(long id);
 
 }
